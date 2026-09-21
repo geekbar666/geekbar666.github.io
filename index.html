@@ -34,7 +34,7 @@
             object-fit: cover;
             z-index: 1;
             pointer-events: none;
-            opacity: 0;
+            opacity: 1;
         }
 
         .glitch-overlay {
@@ -45,7 +45,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 2;
-            opacity: 0;
+            opacity: 1;
             transition: opacity 0.5s;
         }
 
@@ -345,6 +345,27 @@
 
         .social-icon:hover {
             transform: scale(1.4) rotateY(15deg);
+        }
+
+        .corner-github {
+            position: absolute;
+            right: 24px;
+            bottom: 14px;
+            z-index: 30;
+            display: block;
+        }
+
+        .corner-github .social-icon {
+            width: 38px;
+            height: 38px;
+            transform: none;
+            filter: none;
+            transition: filter 0.25s ease;
+        }
+
+        .corner-github .social-icon:hover {
+            transform: none;
+            filter: brightness(1.8) drop-shadow(0 0 14px rgba(255, 255, 255, 1));
         }
 
         
@@ -742,10 +763,11 @@
             padding: 0;
             gap: 18px;
             align-items: flex-start;
-            background: transparent;
+            background: rgba(0, 0, 0, 0.33);
             border: 0;
-            border-radius: 0;
-            backdrop-filter: none;
+            border-radius: 14px;
+            clip-path: polygon(3% 0, 97% 0, 100% 3%, 100% 97%, 97% 100%, 3% 100%, 0 97%, 0 3%);
+            backdrop-filter: blur(3px);
         }
 
         .profile-header {
@@ -758,13 +780,18 @@
         .profile-picture {
             width: 115px;
             height: 115px;
-            border-radius: 18px;
-            clip-path: polygon(18% 0, 82% 0, 100% 18%, 100% 82%, 82% 100%, 18% 100%, 0 82%, 0 18%);
+            border-radius: 25%;
+            clip-path: polygon(7% 0, 93% 0, 100% 7%, 100% 93%, 93% 100%, 7% 100%, 0 93%, 0 7%);
+        }
+
+        .profile-container {
+            margin: 5px 0 0 5px;
         }
 
         .profile-container::after {
-            border-radius: 18px;
-            clip-path: polygon(18% 0, 82% 0, 100% 18%, 100% 82%, 82% 100%, 18% 100%, 0 82%, 0 18%);
+            display: none;
+            border-radius: 10px;
+            clip-path: var(--pfp-clip, polygon(7% 0, 93% 0, 100% 7%, 100% 93%, 93% 100%, 7% 100%, 0 93%, 0 7%));
         }
 
         .profile-info {
@@ -854,6 +881,14 @@
             height: 17px;
         }
 
+        .visitor-counter {
+            pointer-events: none;
+        }
+
+        .visitor-counter .tooltip {
+            display: none !important;
+        }
+
         .top-controls {
             position: fixed;
             top: auto;
@@ -861,10 +896,65 @@
             left: 50%;
             display: flex;
             transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.33);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(3px);
         }
 
         .volume-control {
-            display: none;
+            display: flex;
+        }
+
+        .wallpaper-control {
+            position: fixed;
+            bottom: 68px;
+            left: 18px;
+            z-index: 30;
+            color: #fff;
+            font: 13px 'Courier New', monospace;
+        }
+
+        .pfp-shape-control {
+            position: fixed;
+            bottom: 112px;
+            left: 18px;
+            z-index: 30;
+            color: #fff;
+            font: 13px 'Courier New', monospace;
+        }
+
+        .pfp-shape-control input {
+            width: 130px;
+            vertical-align: middle;
+        }
+
+        .wallpaper-folder-label {
+            display: inline-block;
+            margin-left: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 999px;
+            padding: 8px 12px;
+            background: rgba(0, 0, 0, 0.65);
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .wallpaper-control select {
+            margin-left: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 999px;
+            padding: 8px 12px;
+            background: rgba(0, 0, 0, 0.65);
+            color: #fff;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        @media (max-width: 600px) {
+            .wallpaper-control {
+                bottom: 62px;
+                left: 18px;
+            }
         }
 
         @media (max-width: 600px) {
@@ -971,7 +1061,7 @@
     <div class="container">
         
         <video id="background" autoplay loop muted playsinline webkit-playsinline>
-            <source src="assets/background.mp4" type="video/mp4">
+            <source src="assets/sakura.mp4" type="video/mp4">
         </video>
 
         
@@ -997,22 +1087,7 @@
                 </div>
             </div>
 
-            <div class="bio-separator"></div>
-
-            <div class="profile-footer">
-
-                <div class="social-links">
-                    <a href="https://github.com/JAQLIV" target="_blank">
-                        <img src="assets/github.svg" alt="GitHub" class="social-icon">
-                    </a>
-                    <a href="#bitcoin" aria-label="Bitcoin">
-                        <img src="assets/bitcoin.svg" alt="Bitcoin" class="social-icon">
-                    </a>
-                </div>
-
-            </div>
-
-                <div class="profile-meta">
+            <div class="profile-meta">
                     <div class="visitor-counter">
                         <svg class="visitor-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -1028,6 +1103,9 @@
                         <span>Canada</span>
                     </div>
                 </div>
+                <a class="corner-github" href="https://github.com/geekbar666" target="_blank" rel="noreferrer" aria-label="GitHub">
+                    <img src="assets/github.svg" alt="GitHub" class="social-icon">
+                </a>
         </div>
 
 
@@ -1079,19 +1157,15 @@
                 </svg>
                 <input id="volume-slider" class="slider" type="range" min="0" max="1" step="0.01" value="0.3">
             </div>
-            <div class="transparency-control">
-                <svg class="transparency-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                </svg>
-                <input id="transparency-slider" class="slider" type="range" min="0" max="1" step="0.01" value="0.7">
-            </div>
+        </div>
+
+
         </div>
 
     </div>
 
 
-    <audio id="background-music" loop muted>
+    <audio id="background-music" loop>
         <source src="assets/background_music.mp3" type="audio/mp3">
     </audio>
     <audio id="hacker-music" loop muted>
