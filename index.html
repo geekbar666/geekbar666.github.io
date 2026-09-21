@@ -37,6 +37,14 @@
             opacity: 1;
         }
 
+        #background::-webkit-media-controls,
+        #background::-webkit-media-controls-enclosure,
+        #background::-webkit-media-controls-panel,
+        #background::-webkit-media-controls-play-button {
+            display: none !important;
+            -webkit-appearance: none;
+        }
+
         .glitch-overlay {
             position: fixed;
             top: 0;
@@ -1060,7 +1068,7 @@
 
     <div class="container">
         
-        <video id="background" autoplay loop muted playsinline webkit-playsinline>
+        <video id="background" autoplay loop muted playsinline webkit-playsinline controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture>
             <source src="assets/sakura.mp4" type="video/mp4">
         </video>
 
@@ -1072,8 +1080,6 @@
         <div id="snow-overlay" class="hidden">
             
         </div>
-
-
         <div id="profile-block">
             <div class="profile-header">
                 <div class="profile-container">
