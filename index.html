@@ -14,7 +14,7 @@
 
         
         body {
-            background: #000 url('assets/steins-gate.jpg') center center / cover fixed no-repeat;
+            background: #000;
             color: #fff;
             overflow: hidden;
         }
@@ -40,7 +40,9 @@
         #background::-webkit-media-controls,
         #background::-webkit-media-controls-enclosure,
         #background::-webkit-media-controls-panel,
-        #background::-webkit-media-controls-play-button {
+        #background::-webkit-media-controls-play-button,
+        #background::-webkit-media-controls-start-playback-button,
+        #background::-webkit-media-controls-overlay-play-button {
             display: none !important;
             -webkit-appearance: none;
         }
@@ -1068,7 +1070,7 @@
 
     <div class="container">
         
-        <video id="background" autoplay loop muted playsinline webkit-playsinline controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture>
+        <video id="background" autoplay loop muted playsinline webkit-playsinline preload="auto" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture>
             <source src="assets/sakura.mp4" type="video/mp4">
         </video>
 
