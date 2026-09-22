@@ -777,3 +777,12 @@ body.car-theme {
 #background {
     opacity: 0;
 }
+
+@media (max-width: 600px) {
+  #background {
+    top: -2.5vh;
+    height: 105vh;
+    top: -2.5dvh;
+    height: 105dvh;
+  }
+}
